@@ -8,12 +8,14 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct CalendarView: View {
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Day.date, ascending: true)],
-        animation: .default)
+        predicate: NSPredicate(format: "(date >= %@I AND (date <= %@", 
+                               Date().startOfMonth as CVarArg,
+                               Date().endOfMonth as CVarArg))
     private var days: FetchedResults<Day>
     
     let daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"]
@@ -45,11 +47,31 @@ struct ContentView: View {
             }
             .navigationTitle(Date().formatted(.dateTime.month(.wide)))
             .padding()
+            .onAppear {
+                if days.isEmpty {
+                    createMonthDays(for: .now)
+                }
+            }
         }
     }
+    
+    func createMonthDays(for date: Date) {
+        for dayOffset in 0..<date.numberOfDaysInMonth {
+            let newDay = Day(context: viewContext)
+            newDay.date = Calendar.current.date(byAdding: .day, value: dayOffset, to: date.startOfMonth)
+            newDay.didStudy = false
+        }
+        
+        do {
+            try viewContext.save()
+            print("✅ \(date.monthFullName) day created")
+        } catch {
+            print("Failed to save context")
+        }
 
+    }
 }
 
 #Preview {
-    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    CalendarView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
 }

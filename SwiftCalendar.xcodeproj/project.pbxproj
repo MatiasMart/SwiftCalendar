@@ -8,23 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		624700202B7E56A8008FEFE2 /* SwiftCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */; };
-		624700222B7E56A8008FEFE2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700212B7E56A8008FEFE2 /* ContentView.swift */; };
+		624700222B7E56A8008FEFE2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700212B7E56A8008FEFE2 /* CalendarView.swift */; };
 		624700242B7E56A9008FEFE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624700232B7E56A9008FEFE2 /* Assets.xcassets */; };
 		624700272B7E56A9008FEFE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624700262B7E56A9008FEFE2 /* Preview Assets.xcassets */; };
 		624700292B7E56A9008FEFE2 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700282B7E56A9008FEFE2 /* Persistence.swift */; };
 		6247002C2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6247002A2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld */; };
+		624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700342B7E964D008FEFE2 /* Date+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6247001C2B7E56A8008FEFE2 /* SwiftCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCalendarApp.swift; sourceTree = "<group>"; };
-		624700212B7E56A8008FEFE2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		624700212B7E56A8008FEFE2 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		624700232B7E56A9008FEFE2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		624700262B7E56A9008FEFE2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		624700282B7E56A9008FEFE2 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		6247002B2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SwiftCalendar.xcdatamodel; sourceTree = "<group>"; };
 		6247002D2B7E56A9008FEFE2 /* SwiftCalendar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftCalendar.entitlements; sourceTree = "<group>"; };
 		6247002E2B7E56A9008FEFE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		624700342B7E964D008FEFE2 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */,
-				624700212B7E56A8008FEFE2 /* ContentView.swift */,
+				624700212B7E56A8008FEFE2 /* CalendarView.swift */,
+				624700342B7E964D008FEFE2 /* Date+Ext.swift */,
 				624700232B7E56A9008FEFE2 /* Assets.xcassets */,
 				624700282B7E56A9008FEFE2 /* Persistence.swift */,
 				6247002D2B7E56A9008FEFE2 /* SwiftCalendar.entitlements */,
@@ -149,8 +152,9 @@
 			files = (
 				624700292B7E56A9008FEFE2 /* Persistence.swift in Sources */,
 				6247002C2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld in Sources */,
-				624700222B7E56A8008FEFE2 /* ContentView.swift in Sources */,
+				624700222B7E56A8008FEFE2 /* CalendarView.swift in Sources */,
 				624700202B7E56A8008FEFE2 /* SwiftCalendarApp.swift in Sources */,
+				624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
