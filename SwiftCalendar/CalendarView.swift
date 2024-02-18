@@ -13,12 +13,14 @@ struct CalendarView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Day.date, ascending: true)],
-        predicate: NSPredicate(format: "(date >= %@I AND (date <= %@", 
-                               Date().startOfMonth as CVarArg,
+        predicate: NSPredicate(format: "(date >= %@) AND (date <= %@)",
+                               Date().startCalendarWithPrefixDays as CVarArg,
                                Date().endOfMonth as CVarArg))
     private var days: FetchedResults<Day>
     
     let daysOfWeek = ["S", "M", "T", "W", "T", "F", "S"]
+    
+    @State private var showAlert: Bool = false
     
     var body: some View {
         NavigationView {
@@ -33,15 +35,39 @@ struct CalendarView: View {
                 }
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
                     ForEach(days) {day in
-                        Text(day.date!.formatted(.dateTime.day()))
-                            .fontWeight(.bold)
-                            .foregroundStyle(day.didStudy ? .orange : .secondary)
-                            .frame(maxWidth: .infinity, minHeight: 40)
-                            .background(
-                                Circle()
-                                    .foregroundStyle(.orange.opacity(day.didStudy ? 0.3 : 0.0))
-                            )
+                        if day.date!.monthInt != Date().monthInt {
+                            Text(" ")
+                        } else {
+                            Text(day.date!.formatted(.dateTime.day()))
+                                .fontWeight(.bold)
+                                .foregroundStyle(day.didStudy ? .orange : .secondary)
+                                .frame(maxWidth: .infinity, minHeight: 40)
+                                .background(
+                                    Circle()
+                                        .foregroundStyle(.orange.opacity(day.didStudy ? 0.3 : 0.0))
+                                )
+                                .onTapGesture {
+                                    if day.date!.dayInt <= Date().dayInt {
+                                        day.didStudy.toggle()
+                                        do {
+                                            try viewContext.save()
+                                            print("👆🏻 \(day.date!.dayInt) now studied")
+                                        } catch {
+                                            print("Failed to save context")
+                                        }
+                                    } else {
+                                        showAlert = true
+                                    }
+                                }
+                        }
                     }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(
+                        title: Text("Sure?"),
+                        message: Text("Last time I checked, it was not yet possible to study in the future."),
+                        dismissButton: .default(Text("Ok"))
+                    )
                 }
                 Spacer()
             }
@@ -49,6 +75,9 @@ struct CalendarView: View {
             .padding()
             .onAppear {
                 if days.isEmpty {
+                    createMonthDays(for: .now.startOfPreviousMonth)
+                    createMonthDays(for: .now)
+                } else if days.count < 10 {
                     createMonthDays(for: .now)
                 }
             }
@@ -68,7 +97,7 @@ struct CalendarView: View {
         } catch {
             print("Failed to save context")
         }
-
+        
     }
 }
 
