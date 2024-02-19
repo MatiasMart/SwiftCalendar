@@ -56,7 +56,7 @@ struct PersistenceController {
          // IF nothing exist at the oldStoreURL then we point to the SharedStore
         else if !FileManager.default.fileExists(atPath: oldStoreURL.path) {
             print("🎅🏻 old store doesn't exist. Using new shared URL")
-//            container.persistentStoreDescriptions.first?.url = sharedStoreURL
+            container.persistentStoreDescriptions.first?.url = sharedStoreURL
         }
         
         //Whereever we're pointing print that out
@@ -69,7 +69,7 @@ struct PersistenceController {
         })
         
         //We call migrate
-//        migrateStore(for: container)
+        migrateStore(for: container)
         container.viewContext.automaticallyMergesChangesFromParent = true
     }
     
@@ -81,7 +81,7 @@ struct PersistenceController {
         
         // 2 We first check if we have an old store, if we do then we then will delete it
         guard let oldStore = coordinator.persistentStore(for: oldStoreURL) else { return }
-        print("🛡️ Old store deleted")
+        print("🛡️ Old store no longer exist")
         
         // 3 We migrate the old stores to the new one
         do {
