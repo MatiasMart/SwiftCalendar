@@ -22,6 +22,7 @@ struct CalendarView: View {
     
     @State private var showAlert: Bool = false
     
+    
     var body: some View {
         NavigationView {
             VStack{
@@ -82,6 +83,7 @@ struct CalendarView: View {
                 }
             }
         }
+        
     }
     
     func createMonthDays(for date: Date) {
