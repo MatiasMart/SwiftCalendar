@@ -11,9 +11,6 @@ import CoreData
 
 struct Provider: TimelineProvider {
     
-    //Add the context to the fecth
-    let viewContext = PersistenceController.shared.container.viewContext
-    
     var dayFetchRequest: NSFetchRequest<Day> {
         //Initialize request
         let request = Day.fetchRequest()
