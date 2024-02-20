@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.co.matiasmart.RepoWatcher</string>
+		<string>group.co.matiasmart.SwiftCalendar</string>
 	</array>
 </dict>
 </plist>

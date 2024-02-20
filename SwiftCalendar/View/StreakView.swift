@@ -31,28 +31,9 @@ struct StreakView: View {
                 .foregroundStyle(.secondary)
         }
         .offset(y: -50)
-        .onAppear { streakValue = calculateStreakValue() }
+        .onAppear { streakValue = StreakCalculator().calculateStreakValue(for: days) }
     }
     
-    func calculateStreakValue() -> Int {
-        guard !days.isEmpty else {return 0}
-        
-        let nonFutureDays = days.filter { $0.date!.dayInt <= Date().dayInt }
-        
-        var streakCount = 0
-        
-        for day in nonFutureDays.reversed() {
-            if day.didStudy {
-                streakCount += 1
-            } else {
-                // Give the day of today in advance so it does not break the streak at the beginning of the day
-                if day.date!.dayInt != Date().dayInt {
-                    break
-                }
-            }
-        }
-        return streakCount
-    }
 }
 
 #Preview {

@@ -7,46 +7,77 @@
 
 import WidgetKit
 import SwiftUI
+import CoreData
 
 struct Provider: TimelineProvider {
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), emoji: "😀")
+    
+    //Add the context to the fecth
+    let viewContext = PersistenceController.shared.container.viewContext
+    
+    var dayFetchRequest: NSFetchRequest<Day> {
+        //Initialize request
+        let request = Day.fetchRequest()
+        //Add sort descriptors
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Day.date, ascending: true)]
+        //Add a predicate to it
+        request.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)",
+                                        Date().startCalendarWithPrefixDays as CVarArg,
+                                        Date().endOfMonth as CVarArg)
+        
+        return request
     }
-
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), emoji: "😀")
+    
+    
+    func placeholder(in context: Context) -> CalendarEntry {
+        CalendarEntry(date: Date(), days: [])
+    }
+    
+    func getSnapshot(in context: Context, completion: @escaping (CalendarEntry) -> ()) {
+        
+        
+        
+        //We use the request to fetch the days
+        do {
+            let days = try viewContext.fetch(dayFetchRequest)
+            let entry = CalendarEntry(date: Date(), days: days)
+            completion(entry)
+        } catch {
+            print("Widget failed to fetch days in snapshot")
+        }
+        
+        let entry = CalendarEntry(date: Date(), days: [])
         completion(entry)
     }
-
+    
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        var entries: [SimpleEntry] = []
-
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, emoji: "😀")
-            entries.append(entry)
+        //We use the request to fetch the days
+        do {
+            let days = try viewContext.fetch(dayFetchRequest)
+            let entry = CalendarEntry(date: Date(), days: days)
+            //                                        We update at the end of the day to check for the streak
+            let timeline = Timeline(entries: [entry], policy: .after(.now.endOfDay))
+            completion(timeline)
+        } catch {
+            print("Widget failed to fetch days in snapshot")
         }
-
-        let timeline = Timeline(entries: entries, policy: .atEnd)
-        completion(timeline)
+        
+        
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct CalendarEntry: TimelineEntry {
     let date: Date
-    let emoji: String
+    let days: [Day]
 }
 
 struct SwiftCalendarWidgetEntryView : View {
-    var entry: Provider.Entry
+    var entry: CalendarEntry
     let columns = Array(repeating: GridItem(.flexible()), count: 7)
-
+    
     var body: some View {
         HStack {
             VStack{
-                Text("30")
+                Text("\(calculateStreakValue())")
                     .font(.system(size: 70, design: .rounded))
                     .bold()
                     .foregroundStyle(.orange)
@@ -59,27 +90,56 @@ struct SwiftCalendarWidgetEntryView : View {
             VStack {
                 CalendarHeaderView(font: .caption)
                 LazyVGrid(columns: columns, spacing: 8) {
-                    ForEach(0..<31) { _ in
-                        Text("30")
-                            .font(.caption2)
-                            .bold()
-                            .frame(maxWidth: .infinity)
-                            .foregroundStyle(.secondary)
-                            .background(
-                                Circle()
-                                    .foregroundStyle(.orange.opacity(0.3))
-                            )
+                    ForEach(entry.days) { day in
+                        if day.date?.monthInt != Date().monthInt {
+                            Text(" ")
+                        } else {
+                            Text(day.date!.formatted(.dateTime.day()))
+                                .font(.caption2)
+                                .bold()
+                                .frame(maxWidth: .infinity)
+                                .foregroundStyle(day.didStudy ? .orange : .secondary)
+                                .background(
+                                    Circle()
+                                        .foregroundStyle(.orange.opacity(day.didStudy ? 0.4 : 0.0))
+                                        .scaleEffect(1.4)
+                                )
+                        }
                     }
                 }
             }
+            .padding(.leading, 6)
         }
-
+        .padding()
+    }
+    
+    func calculateStreakValue() -> Int {
+        
+        guard !entry.days.isEmpty else {return 0}
+        
+        let nonFutureDays = entry.days.filter { $0.date!.dayInt <= Date().dayInt }
+        
+        var streakCount = 0
+        
+        for day in nonFutureDays.reversed() {
+            if day.didStudy {
+                streakCount += 1
+            } else {
+                // Give the day of today in advance so it does not break the streak at the beginning of the day
+                if day.date!.dayInt != Date().dayInt {
+                    break
+                }
+            }
+        }
+        return streakCount
     }
 }
 
+
+
 struct SwiftCalendarWidget: Widget {
     let kind: String = "SwiftCalendarWidget"
-
+    
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             if #available(iOS 17.0, *) {
@@ -91,8 +151,8 @@ struct SwiftCalendarWidget: Widget {
                     .background()
             }
         }
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Swift Study Calendar")
+        .description("Track day you study Swift with Streaks")
         .supportedFamilies([.systemMedium])
     }
 }
@@ -100,6 +160,6 @@ struct SwiftCalendarWidget: Widget {
 #Preview(as: .systemMedium) {
     SwiftCalendarWidget()
 } timeline: {
-    SimpleEntry(date: .now, emoji: "😀")
-    SimpleEntry(date: .now, emoji: "🤩")
+    CalendarEntry(date: .now, days: [])
+    CalendarEntry(date: .now, days: [])
 }

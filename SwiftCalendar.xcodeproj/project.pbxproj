@@ -22,7 +22,14 @@
 		6247002C2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6247002A2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld */; };
 		624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700342B7E964D008FEFE2 /* Date+Ext.swift */; };
 		624BC9E82B83ACF000124B41 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */; };
-		62C58DB72B83AED00021160B /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */; };
+		62C58DB82B84E0080021160B /* SwiftCalendar.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6247002A2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld */; };
+		62C58DB92B84E1EE0021160B /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700342B7E964D008FEFE2 /* Date+Ext.swift */; };
+		62C58DBA2B84E2A50021160B /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700282B7E56A9008FEFE2 /* Persistence.swift */; };
+		62C58DBC2B84EC910021160B /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DBB2B84EC910021160B /* StreakCalculator.swift */; };
+		62C58DBD2B84EC950021160B /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DBB2B84EC910021160B /* StreakCalculator.swift */; };
+		62C58DC22B84F03D0021160B /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700212B7E56A8008FEFE2 /* CalendarView.swift */; };
+		62C58DC32B84F0760021160B /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */; };
+		62C58DC42B84F2B60021160B /* SwiftCalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62234C502B7FBA96006C17A7 /* SwiftCalendarWidget.swift */; };
 		62FF08AA2B82674F00F4ACE5 /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF08A92B82674F00F4ACE5 /* StreakView.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +77,7 @@
 		6247002E2B7E56A9008FEFE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		624700342B7E964D008FEFE2 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		62C58DBB2B84EC910021160B /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator.swift; sourceTree = "<group>"; };
 		62F0DD922B7FBDD6006182A0 /* SwiftCalendarWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftCalendarWidgetExtension.entitlements; sourceTree = "<group>"; };
 		62FF08A92B82674F00F4ACE5 /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,13 +146,10 @@
 		6247001E2B7E56A8008FEFE2 /* SwiftCalendar */ = {
 			isa = PBXGroup;
 			children = (
-				6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */,
-				624700212B7E56A8008FEFE2 /* CalendarView.swift */,
-				62FF08A92B82674F00F4ACE5 /* StreakView.swift */,
-				624700342B7E964D008FEFE2 /* Date+Ext.swift */,
-				624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */,
+				62C58DBE2B84ECB30021160B /* Model */,
+				62C58DBF2B84ECB80021160B /* View */,
+				62C58DC02B84ECBC0021160B /* ViewModel */,
 				624700232B7E56A9008FEFE2 /* Assets.xcassets */,
-				624700282B7E56A9008FEFE2 /* Persistence.swift */,
 				6247002D2B7E56A9008FEFE2 /* SwiftCalendar.entitlements */,
 				6247002E2B7E56A9008FEFE2 /* Info.plist */,
 				6247002A2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld */,
@@ -159,6 +164,34 @@
 				624700262B7E56A9008FEFE2 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		62C58DBE2B84ECB30021160B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				62C58DBB2B84EC910021160B /* StreakCalculator.swift */,
+				624700282B7E56A9008FEFE2 /* Persistence.swift */,
+				624700342B7E964D008FEFE2 /* Date+Ext.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		62C58DBF2B84ECB80021160B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				624700212B7E56A8008FEFE2 /* CalendarView.swift */,
+				62FF08A92B82674F00F4ACE5 /* StreakView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		62C58DC02B84ECBC0021160B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */,
+				624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,8 +296,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				62234C512B7FBA96006C17A7 /* SwiftCalendarWidget.swift in Sources */,
-				62C58DB72B83AED00021160B /* CalendarHeaderView.swift in Sources */,
 				62234C4F2B7FBA96006C17A7 /* SwiftCalendarWidgetLiveActivity.swift in Sources */,
+				62C58DC22B84F03D0021160B /* CalendarView.swift in Sources */,
+				62C58DBA2B84E2A50021160B /* Persistence.swift in Sources */,
+				62C58DB92B84E1EE0021160B /* Date+Ext.swift in Sources */,
+				62C58DBD2B84EC950021160B /* StreakCalculator.swift in Sources */,
+				62C58DB82B84E0080021160B /* SwiftCalendar.xcdatamodeld in Sources */,
+				62C58DC32B84F0760021160B /* CalendarHeaderView.swift in Sources */,
 				62234C4D2B7FBA96006C17A7 /* SwiftCalendarWidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,8 +314,10 @@
 				62FF08AA2B82674F00F4ACE5 /* StreakView.swift in Sources */,
 				624700292B7E56A9008FEFE2 /* Persistence.swift in Sources */,
 				624BC9E82B83ACF000124B41 /* CalendarHeaderView.swift in Sources */,
+				62C58DC42B84F2B60021160B /* SwiftCalendarWidget.swift in Sources */,
 				6247002C2B7E56A9008FEFE2 /* SwiftCalendar.xcdatamodeld in Sources */,
 				624700222B7E56A8008FEFE2 /* CalendarView.swift in Sources */,
+				62C58DBC2B84EC910021160B /* StreakCalculator.swift in Sources */,
 				624700202B7E56A8008FEFE2 /* SwiftCalendarApp.swift in Sources */,
 				624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */,
 			);
