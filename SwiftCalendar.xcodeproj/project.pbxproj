@@ -28,6 +28,8 @@
 		62C58DC42B84F2B60021160B /* SwiftCalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62234C502B7FBA96006C17A7 /* SwiftCalendarWidget.swift */; };
 		62C58DC62B85286F0021160B /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DC52B85286F0021160B /* Day.swift */; };
 		62C58DC72B85286F0021160B /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DC52B85286F0021160B /* Day.swift */; };
+		62C58DC92B85613A0021160B /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DC82B85613A0021160B /* Persistance.swift */; };
+		62C58DCA2B85663A0021160B /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DC82B85613A0021160B /* Persistance.swift */; };
 		62FF08AA2B82674F00F4ACE5 /* StreakView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FF08A92B82674F00F4ACE5 /* StreakView.swift */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +77,7 @@
 		624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
 		62C58DBB2B84EC910021160B /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator.swift; sourceTree = "<group>"; };
 		62C58DC52B85286F0021160B /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		62C58DC82B85613A0021160B /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
 		62F0DD922B7FBDD6006182A0 /* SwiftCalendarWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SwiftCalendarWidgetExtension.entitlements; sourceTree = "<group>"; };
 		62FF08A92B82674F00F4ACE5 /* StreakView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,6 +171,7 @@
 				62C58DC52B85286F0021160B /* Day.swift */,
 				62C58DBB2B84EC910021160B /* StreakCalculator.swift */,
 				624700342B7E964D008FEFE2 /* Date+Ext.swift */,
+				62C58DC82B85613A0021160B /* Persistance.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +300,7 @@
 				62C58DC22B84F03D0021160B /* CalendarView.swift in Sources */,
 				62C58DB92B84E1EE0021160B /* Date+Ext.swift in Sources */,
 				62C58DBD2B84EC950021160B /* StreakCalculator.swift in Sources */,
+				62C58DCA2B85663A0021160B /* Persistance.swift in Sources */,
 				62C58DC32B84F0760021160B /* CalendarHeaderView.swift in Sources */,
 				62C58DC72B85286F0021160B /* Day.swift in Sources */,
 				62234C4D2B7FBA96006C17A7 /* SwiftCalendarWidgetBundle.swift in Sources */,
@@ -311,6 +316,7 @@
 				62C58DC42B84F2B60021160B /* SwiftCalendarWidget.swift in Sources */,
 				624700222B7E56A8008FEFE2 /* CalendarView.swift in Sources */,
 				62C58DBC2B84EC910021160B /* StreakCalculator.swift in Sources */,
+				62C58DC92B85613A0021160B /* Persistance.swift in Sources */,
 				624700202B7E56A8008FEFE2 /* SwiftCalendarApp.swift in Sources */,
 				62C58DC62B85286F0021160B /* Day.swift in Sources */,
 				624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */,

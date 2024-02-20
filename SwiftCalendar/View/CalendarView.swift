@@ -89,5 +89,5 @@ struct CalendarView: View {
 }
 
 #Preview {
-    CalendarView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+    CalendarView()
 }

@@ -7,57 +7,41 @@
 
 import WidgetKit
 import SwiftUI
-import CoreData
+import SwiftData
 
 struct Provider: TimelineProvider {
     
-    var dayFetchRequest: NSFetchRequest<Day> {
-        //Initialize request
-        let request = Day.fetchRequest()
-        //Add sort descriptors
-        request.sortDescriptors = [NSSortDescriptor(keyPath: \Day.date, ascending: true)]
-        //Add a predicate to it
-        request.predicate = NSPredicate(format: "(date >= %@) AND (date <= %@)",
-                                        Date().startCalendarWithPrefixDays as CVarArg,
-                                        Date().endOfMonth as CVarArg)
-        
-        return request
-    }
-    
+    let container = Persistance().container
     
     func placeholder(in context: Context) -> CalendarEntry {
         CalendarEntry(date: Date(), days: [])
     }
     
-    func getSnapshot(in context: Context, completion: @escaping (CalendarEntry) -> ()) {
-        
-        
+    @MainActor func getSnapshot(in context: Context, completion: @escaping (CalendarEntry) -> ()) {
         
         //We use the request to fetch the days
-        do {
-            let days = try viewContext.fetch(dayFetchRequest)
-            let entry = CalendarEntry(date: Date(), days: days)
+            let entry = CalendarEntry(date: Date(), days: fetchDays())
             completion(entry)
-        } catch {
-            print("Widget failed to fetch days in snapshot")
-        }
-        
-        let entry = CalendarEntry(date: Date(), days: [])
-        completion(entry)
+
     }
     
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
+    @MainActor func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
         //We use the request to fetch the days
-        do {
-            let days = try viewContext.fetch(dayFetchRequest)
-            let entry = CalendarEntry(date: Date(), days: days)
+            let entry = CalendarEntry(date: Date(), days: fetchDays())
             //                                        We update at the end of the day to check for the streak
             let timeline = Timeline(entries: [entry], policy: .after(.now.endOfDay))
             completion(timeline)
-        } catch {
-            print("Widget failed to fetch days in snapshot")
-        }
+    }
+    
+    @MainActor func fetchDays() -> [Day] {
         
+        let startDate = Date().startCalendarWithPrefixDays
+        let endDate = Date().endOfMonth
+        
+        let predicate = #Predicate<Day> { $0.date > startDate && $0.date < endDate}
+        let descriptor = FetchDescriptor<Day>(predicate: predicate, sortBy: [.init(\.date)])
+        
+        return try! container.mainContext.fetch(descriptor)
         
     }
 }
@@ -91,10 +75,10 @@ struct SwiftCalendarWidgetEntryView : View {
                     CalendarHeaderView(font: .caption)
                     LazyVGrid(columns: columns, spacing: 8) {
                         ForEach(entry.days) { day in
-                            if day.date?.monthInt != Date().monthInt {
+                            if day.date.monthInt != Date().monthInt {
                                 Text(" ")
                             } else {
-                                Text(day.date!.formatted(.dateTime.day()))
+                                Text(day.date.formatted(.dateTime.day()))
                                     .font(.caption2)
                                     .bold()
                                     .frame(maxWidth: .infinity)
@@ -118,7 +102,7 @@ struct SwiftCalendarWidgetEntryView : View {
         
         guard !entry.days.isEmpty else {return 0}
         
-        let nonFutureDays = entry.days.filter { $0.date!.dayInt <= Date().dayInt }
+        let nonFutureDays = entry.days.filter { $0.date.dayInt <= Date().dayInt }
         
         var streakCount = 0
         
@@ -127,7 +111,7 @@ struct SwiftCalendarWidgetEntryView : View {
                 streakCount += 1
             } else {
                 // Give the day of today in advance so it does not break the streak at the beginning of the day
-                if day.date!.dayInt != Date().dayInt {
+                if day.date.dayInt != Date().dayInt {
                     break
                 }
             }
