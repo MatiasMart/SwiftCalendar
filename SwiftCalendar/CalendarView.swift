@@ -26,14 +26,7 @@ struct CalendarView: View {
     var body: some View {
         NavigationView {
             VStack{
-                HStack{
-                    ForEach (daysOfWeek, id: \.self) {daysOfWeek in
-                        Text(daysOfWeek)
-                            .fontWeight(.black)
-                            .foregroundStyle(.orange)
-                            .frame(maxWidth: .infinity)
-                    }
-                }
+                CalendarHeaderView()
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7)) {
                     ForEach(days) {day in
                         if day.date!.monthInt != Date().monthInt {
