@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 
-struct Persistance {
+struct Persistence {
     
     // We get the url of our new store so that the widget and the app can see the same information
     static var sharedStoreURL: URL {
@@ -17,7 +17,7 @@ struct Persistance {
         return container.appending(path: "SwiftCalendar.sqlite")
     }
     
-    let container: ModelContainer = {
+     let container: ModelContainer = {
         let config = ModelConfiguration(url: sharedStoreURL)
         return try! ModelContainer(for: Day.self, configurations: config)
     }()

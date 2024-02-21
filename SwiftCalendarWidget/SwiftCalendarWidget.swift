@@ -11,7 +11,7 @@ import SwiftData
 
 struct Provider: TimelineProvider {
     
-    let container = Persistance().container
+    let container = Persistence().container
     
     func placeholder(in context: Context) -> CalendarEntry {
         CalendarEntry(date: Date(), days: [])

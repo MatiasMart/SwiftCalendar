@@ -22,7 +22,7 @@ struct SwiftCalendarApp: App {
                     .tabItem { Label("Streak", systemImage: "flame.fill") }
                     .tag(1)
             }
-            .modelContainer(Persistance().container)
+            .modelContainer(Persistence().container)
             .onOpenURL { url in
                 print(url.absoluteString)
                 selectedTab = url.absoluteString == "calendar" ? 0 : 1
