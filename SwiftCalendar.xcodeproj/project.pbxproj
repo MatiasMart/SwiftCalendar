@@ -20,6 +20,8 @@
 		624700272B7E56A9008FEFE2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624700262B7E56A9008FEFE2 /* Preview Assets.xcassets */; };
 		624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700342B7E964D008FEFE2 /* Date+Ext.swift */; };
 		624BC9E82B83ACF000124B41 /* CalendarHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */; };
+		62BA972A2B8636610046DE8C /* AppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BA97292B8636610046DE8C /* AppIntents.swift */; };
+		62BA972B2B8636610046DE8C /* AppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62BA97292B8636610046DE8C /* AppIntents.swift */; };
 		62C58DB92B84E1EE0021160B /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700342B7E964D008FEFE2 /* Date+Ext.swift */; };
 		62C58DBC2B84EC910021160B /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DBB2B84EC910021160B /* StreakCalculator.swift */; };
 		62C58DBD2B84EC950021160B /* StreakCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62C58DBB2B84EC910021160B /* StreakCalculator.swift */; };
@@ -75,6 +77,7 @@
 		6247002E2B7E56A9008FEFE2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		624700342B7E964D008FEFE2 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		624BC9E72B83ACF000124B41 /* CalendarHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarHeaderView.swift; sourceTree = "<group>"; };
+		62BA97292B8636610046DE8C /* AppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntents.swift; sourceTree = "<group>"; };
 		62C58DBB2B84EC910021160B /* StreakCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StreakCalculator.swift; sourceTree = "<group>"; };
 		62C58DC52B85286F0021160B /* Day.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
 		62C58DC82B85613A0021160B /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 				62C58DBB2B84EC910021160B /* StreakCalculator.swift */,
 				624700342B7E964D008FEFE2 /* Date+Ext.swift */,
 				62C58DC82B85613A0021160B /* Persistence.swift */,
+				62BA97292B8636610046DE8C /* AppIntents.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -296,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62234C512B7FBA96006C17A7 /* SwiftCalendarWidget.swift in Sources */,
+				62BA972B2B8636610046DE8C /* AppIntents.swift in Sources */,
 				62234C4F2B7FBA96006C17A7 /* SwiftCalendarWidgetLiveActivity.swift in Sources */,
 				62C58DC22B84F03D0021160B /* CalendarView.swift in Sources */,
 				62C58DB92B84E1EE0021160B /* Date+Ext.swift in Sources */,
@@ -312,6 +317,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FF08AA2B82674F00F4ACE5 /* StreakView.swift in Sources */,
+				62BA972A2B8636610046DE8C /* AppIntents.swift in Sources */,
 				624BC9E82B83ACF000124B41 /* CalendarHeaderView.swift in Sources */,
 				62C58DC42B84F2B60021160B /* SwiftCalendarWidget.swift in Sources */,
 				624700222B7E56A8008FEFE2 /* CalendarView.swift in Sources */,
