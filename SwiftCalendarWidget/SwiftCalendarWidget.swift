@@ -53,19 +53,102 @@ struct CalendarEntry: TimelineEntry {
 }
 
 struct SwiftCalendarWidgetEntryView : View {
+    // First we introduce the widget family
+    @Environment(\.widgetFamily) var family
+    
     var entry: CalendarEntry
-    let columns = Array(repeating: GridItem(.flexible()), count: 7)
     
     var today: Day {
         entry.days.filter  { Calendar.current.isDate($0.date, inSameDayAs: .now) }.first ?? .init(date: .distantPast, didStudy: false)
     }
     
     var body: some View {
+        switch family {
+        case .systemMedium:
+            MediumCalendarView(today: today,
+                               entry: entry,
+                               streakValue: calculateStreakValue())
+        case .accessoryCircular:
+            EmptyView()
+        case .accessoryRectangular:
+            EmptyView()
+        case .accessoryInline:
+            Label("Streak - \(calculateStreakValue()) days", systemImage: "swift")
+        case .systemSmall, .systemLarge, .systemExtraLarge:
+            EmptyView()
+        @unknown default:
+            EmptyView()
+        }
+    }
+    
+    func calculateStreakValue() -> Int {
+        
+        guard !entry.days.isEmpty else {return 0}
+        
+        let nonFutureDays = entry.days.filter { $0.date.dayInt <= Date().dayInt }
+        
+        var streakCount = 0
+        
+        for day in nonFutureDays.reversed() {
+            if day.didStudy {
+                streakCount += 1
+            } else {
+                // Give the day of today in advance so it does not break the streak at the beginning of the day
+                if day.date.dayInt != Date().dayInt {
+                    break
+                }
+            }
+        }
+        return streakCount
+    }
+}
+
+
+
+struct SwiftCalendarWidget: Widget {
+    let kind: String = "SwiftCalendarWidget"
+    
+    var body: some WidgetConfiguration {
+        StaticConfiguration(kind: kind, provider: Provider()) { entry in
+            if #available(iOS 17.0, *) {
+                SwiftCalendarWidgetEntryView(entry: entry)
+                    .containerBackground(.fill.tertiary, for: .widget)
+            } else {
+                SwiftCalendarWidgetEntryView(entry: entry)
+                    .padding()
+                    .background()
+            }
+        }
+        .configurationDisplayName("Swift Study Calendar")
+        .description("Track day you study Swift with Streaks")
+        .supportedFamilies([.systemMedium,
+                            .accessoryCircular,
+                            .accessoryRectangular,
+                            .accessoryInline])
+    }
+}
+
+#Preview(as: .accessoryInline) {
+    SwiftCalendarWidget()
+} timeline: {
+    CalendarEntry(date: .now, days: [])
+    CalendarEntry(date: .now, days: [])
+}
+
+//MARK: - UI Components for widget sises
+
+private struct MediumCalendarView: View {
+    var today: Day
+    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    var entry: CalendarEntry
+    var streakValue: Int
+    var body: some View {
+        
         HStack {
             VStack{
                 Link(destination: URL(string: "streak")!) {
                     VStack{
-                        Text("\(calculateStreakValue())")
+                        Text("\(streakValue)")
                             .font(.system(size: 70, design: .rounded))
                             .bold()
                             .foregroundStyle(.orange)
@@ -112,54 +195,4 @@ struct SwiftCalendarWidgetEntryView : View {
         }
         .padding()
     }
-    
-    func calculateStreakValue() -> Int {
-        
-        guard !entry.days.isEmpty else {return 0}
-        
-        let nonFutureDays = entry.days.filter { $0.date.dayInt <= Date().dayInt }
-        
-        var streakCount = 0
-        
-        for day in nonFutureDays.reversed() {
-            if day.didStudy {
-                streakCount += 1
-            } else {
-                // Give the day of today in advance so it does not break the streak at the beginning of the day
-                if day.date.dayInt != Date().dayInt {
-                    break
-                }
-            }
-        }
-        return streakCount
-    }
-}
-
-
-
-struct SwiftCalendarWidget: Widget {
-    let kind: String = "SwiftCalendarWidget"
-    
-    var body: some WidgetConfiguration {
-        StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                SwiftCalendarWidgetEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-            } else {
-                SwiftCalendarWidgetEntryView(entry: entry)
-                    .padding()
-                    .background()
-            }
-        }
-        .configurationDisplayName("Swift Study Calendar")
-        .description("Track day you study Swift with Streaks")
-        .supportedFamilies([.systemMedium])
-    }
-}
-
-#Preview(as: .systemMedium) {
-    SwiftCalendarWidget()
-} timeline: {
-    CalendarEntry(date: .now, days: [])
-    CalendarEntry(date: .now, days: [])
 }

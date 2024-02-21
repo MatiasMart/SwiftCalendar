@@ -22,7 +22,7 @@ struct StreakView: View {
         VStack{
             Text("\(streakValue)")
                 .font(.system(size: 200, weight: .semibold, design: .rounded))
-                .foregroundStyle(streakValue > 0 ? .orange : .pink)
+                .foregroundColor(getTextColor(for: streakValue))            
             Text("Current Streak this Month")
                 .font(.title2)
                 .bold()
@@ -32,6 +32,19 @@ struct StreakView: View {
         .onAppear { streakValue = StreakCalculator().calculateStreakValue(for: days) }
     }
     
+}
+
+// Helper function to determine text color based on streakValue
+func getTextColor(for streakValue: Int) -> Color {
+    if streakValue >= 1 && streakValue <= 3 {
+        return .orange
+    } else if streakValue > 3 {
+        // Add more conditions/options as needed
+        return .mint
+    } else {
+        // Default color if streakValue is 0
+        return .pink
+    }
 }
 
 #Preview {
