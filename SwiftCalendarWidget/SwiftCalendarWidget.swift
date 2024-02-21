@@ -69,9 +69,9 @@ struct SwiftCalendarWidgetEntryView : View {
                                entry: entry,
                                streakValue: calculateStreakValue())
         case .accessoryCircular:
-            EmptyView()
+            LockScreenCircular(entry: entry)
         case .accessoryRectangular:
-            EmptyView()
+            LockScreenRectangularView(entry: entry)
         case .accessoryInline:
             Label("Streak - \(calculateStreakValue()) days", systemImage: "swift")
         case .systemSmall, .systemLarge, .systemExtraLarge:
@@ -79,6 +79,7 @@ struct SwiftCalendarWidgetEntryView : View {
         @unknown default:
             EmptyView()
         }
+
     }
     
     func calculateStreakValue() -> Int {
@@ -128,7 +129,7 @@ struct SwiftCalendarWidget: Widget {
     }
 }
 
-#Preview(as: .accessoryInline) {
+#Preview(as: .accessoryCircular) {
     SwiftCalendarWidget()
 } timeline: {
     CalendarEntry(date: .now, days: [])
@@ -192,6 +193,54 @@ private struct MediumCalendarView: View {
                 }
             }
             .padding(.leading, 6)
+        }
+        .padding()
+    }
+}
+
+private struct LockScreenCircular: View {
+    var entry: CalendarEntry
+    
+    var currentCalendarDays: Int {
+        entry.days.filter { $0.date.monthInt == Date().monthInt }.count
+    }
+    
+    var dayStudied: Int {
+        entry.days.filter { $0.date.monthInt == Date().monthInt }.filter { $0.didStudy}.count
+    }
+    
+    var body: some View {
+        Gauge(value: Double(dayStudied), in: 1...Double(currentCalendarDays)) {
+            Image(systemName: "swift")
+        } currentValueLabel: {
+            Text("\(dayStudied)")
+        }
+        .gaugeStyle(.accessoryCircular)
+    }
+}
+
+private struct LockScreenRectangularView: View {
+    let columns = Array(repeating: GridItem(.flexible()), count: 7)
+    var entry: CalendarEntry
+    var body: some View {
+        LazyVGrid(columns: columns, spacing: 4) {
+            ForEach(entry.days) { day in
+                if day.date.monthInt != Date().monthInt {
+                    Text(" ")
+                        .font(.system(size: 7))
+                } else {
+                    if day.didStudy {
+                        Image(systemName: "swift")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 7, height: 7)
+                    } else {
+                        Text(day.date.formatted(.dateTime.day()))
+                            .font(.system(size: 7))
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+            }
         }
         .padding()
     }
