@@ -18,10 +18,19 @@ struct CalendarView: View {
     static var startDate: Date  { .now.startCalendarWithPrefixDays }
     static var endDate: Date  { .now.endOfMonth }
     
-    let daysOfWeek: [String] = ["S", "M", "T", "W", "T", "F", "S"]
+    var currentCalendarDays: Int {
+        days.filter { $0.date.monthInt == Date().monthInt }.count
+    }
+    
+    var dayStudied: Int {
+        days.filter { $0.date.monthInt == Date().monthInt }.filter { $0.didStudy}.count
+    }
     
     @State private var showAlert: Bool = false
     
+    @State private var isLiked: Bool = false
+    
+    let gradient = Gradient(colors: [.secondary, .orange, .mint])
     
     var body: some View {
         NavigationView {
@@ -43,12 +52,12 @@ struct CalendarView: View {
                                 .onTapGesture {
                                     if day.date.dayInt <= Date().dayInt {
                                         day.didStudy.toggle()
+                                        isLiked.toggle()
                                         WidgetCenter.shared.reloadTimelines(ofKind: "SwiftCalendarWidget")
-
+                                        
                                     } else {
                                         showAlert = true
                                     }
-                                    
                                 }
                         }
                     }
@@ -60,6 +69,36 @@ struct CalendarView: View {
                         dismissButton: .default(Text("Ok"))
                     )
                 }
+                Divider()
+//                createCustomAnimationCustomButton(systemImage: "Swift", status: isLiked, activeTint: .pink, inActiveTint: .gray) {
+//                    isLiked.toggle()
+//                }
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3)) {
+                    VStack {
+                        Text("Total days in this month:")
+                            .fontWeight(.bold)
+                            .foregroundStyle(.secondary)
+                        Text("\(currentCalendarDays)")
+                            .fontWeight(.bold)
+                            .foregroundStyle(.mint)
+                    }
+                    Gauge(value: Double(dayStudied), in: 1...Double(currentCalendarDays)) {
+                        Image(systemName: "swift")
+                    } currentValueLabel: {
+                        Text("\(dayStudied)")
+                    }
+                    .gaugeStyle(.accessoryCircular)
+                    .tint(gradient)
+                    VStack {
+                        Text("Total days studied:")
+                            .fontWeight(.bold)
+                            .foregroundStyle(.secondary)
+                        Text("\(dayStudied)")
+                            .fontWeight(.bold)
+                            .foregroundStyle(.orange)
+                    }
+                }
+                .padding()
                 Spacer()
             }
             .navigationTitle(Date().formatted(.dateTime.month(.wide)))
@@ -73,7 +112,19 @@ struct CalendarView: View {
                 }
             }
         }
-        
+    }
+    
+    @ViewBuilder
+    func createCustomAnimationCustomButton(systemImage: String, status: Bool, activeTint: Color, inActiveTint: Color, onTap: @escaping () -> ()) -> some View {
+            Image(systemName: "swift")
+                .font(.title2)
+                .foregroundStyle(status ? activeTint : inActiveTint)
+                .padding (.horizontal, 18)
+                .padding(.vertical, 8)
+                .background {
+                    Capsule()
+                }
+                .particleEffect(systemImage: "swift", font: .title2, status: status, activeTint: activeTint, inActiveTint: inActiveTint)
     }
     
     func createMonthDays(for date: Date) {
@@ -88,6 +139,3 @@ struct CalendarView: View {
     }
 }
 
-#Preview {
-    CalendarView()
-}

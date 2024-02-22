@@ -14,6 +14,10 @@
 		62234C512B7FBA96006C17A7 /* SwiftCalendarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62234C502B7FBA96006C17A7 /* SwiftCalendarWidget.swift */; };
 		62234C532B7FBA98006C17A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62234C522B7FBA98006C17A7 /* Assets.xcassets */; };
 		62234C572B7FBA98006C17A7 /* SwiftCalendarWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 62234C452B7FBA96006C17A7 /* SwiftCalendarWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		6225D1CB2B87DB9B00C214F9 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6226AB192B87C6740037C182 /* Particle.swift */; };
+		6225D1CC2B87DB9E00C214F9 /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6226AB172B87C5D40037C182 /* ParticleEffect.swift */; };
+		6226AB182B87C5D40037C182 /* ParticleEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6226AB172B87C5D40037C182 /* ParticleEffect.swift */; };
+		6226AB1A2B87C6740037C182 /* Particle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6226AB192B87C6740037C182 /* Particle.swift */; };
 		624700202B7E56A8008FEFE2 /* SwiftCalendarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */; };
 		624700222B7E56A8008FEFE2 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624700212B7E56A8008FEFE2 /* CalendarView.swift */; };
 		624700242B7E56A9008FEFE2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 624700232B7E56A9008FEFE2 /* Assets.xcassets */; };
@@ -68,6 +72,8 @@
 		62234C502B7FBA96006C17A7 /* SwiftCalendarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCalendarWidget.swift; sourceTree = "<group>"; };
 		62234C522B7FBA98006C17A7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		62234C542B7FBA98006C17A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6226AB172B87C5D40037C182 /* ParticleEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticleEffect.swift; sourceTree = "<group>"; };
+		6226AB192B87C6740037C182 /* Particle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Particle.swift; sourceTree = "<group>"; };
 		6247001C2B7E56A8008FEFE2 /* SwiftCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6247001F2B7E56A8008FEFE2 /* SwiftCalendarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftCalendarApp.swift; sourceTree = "<group>"; };
 		624700212B7E56A8008FEFE2 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -176,6 +182,7 @@
 				624700342B7E964D008FEFE2 /* Date+Ext.swift */,
 				62C58DC82B85613A0021160B /* Persistence.swift */,
 				62BA97292B8636610046DE8C /* AppIntents.swift */,
+				6226AB192B87C6740037C182 /* Particle.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,6 +192,7 @@
 			children = (
 				624700212B7E56A8008FEFE2 /* CalendarView.swift */,
 				62FF08A92B82674F00F4ACE5 /* StreakView.swift */,
+				6226AB172B87C5D40037C182 /* ParticleEffect.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -304,8 +312,10 @@
 				62234C4F2B7FBA96006C17A7 /* SwiftCalendarWidgetLiveActivity.swift in Sources */,
 				62C58DC22B84F03D0021160B /* CalendarView.swift in Sources */,
 				62C58DB92B84E1EE0021160B /* Date+Ext.swift in Sources */,
+				6225D1CB2B87DB9B00C214F9 /* Particle.swift in Sources */,
 				62C58DBD2B84EC950021160B /* StreakCalculator.swift in Sources */,
 				62C58DCA2B85663A0021160B /* Persistence.swift in Sources */,
+				6225D1CC2B87DB9E00C214F9 /* ParticleEffect.swift in Sources */,
 				62C58DC32B84F0760021160B /* CalendarHeaderView.swift in Sources */,
 				62C58DC72B85286F0021160B /* Day.swift in Sources */,
 				62234C4D2B7FBA96006C17A7 /* SwiftCalendarWidgetBundle.swift in Sources */,
@@ -317,6 +327,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62FF08AA2B82674F00F4ACE5 /* StreakView.swift in Sources */,
+				6226AB1A2B87C6740037C182 /* Particle.swift in Sources */,
 				62BA972A2B8636610046DE8C /* AppIntents.swift in Sources */,
 				624BC9E82B83ACF000124B41 /* CalendarHeaderView.swift in Sources */,
 				62C58DC42B84F2B60021160B /* SwiftCalendarWidget.swift in Sources */,
@@ -325,6 +336,7 @@
 				62C58DC92B85613A0021160B /* Persistence.swift in Sources */,
 				624700202B7E56A8008FEFE2 /* SwiftCalendarApp.swift in Sources */,
 				62C58DC62B85286F0021160B /* Day.swift in Sources */,
+				6226AB182B87C5D40037C182 /* ParticleEffect.swift in Sources */,
 				624700352B7E964D008FEFE2 /* Date+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

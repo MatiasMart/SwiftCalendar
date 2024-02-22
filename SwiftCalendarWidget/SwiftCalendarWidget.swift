@@ -242,6 +242,5 @@ private struct LockScreenRectangularView: View {
                 }
             }
         }
-        .padding()
     }
 }
